@@ -15,13 +15,13 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView v1; //Creamos variable ListView para poder utilizarla en todo el Main
+    //ListView v1; //Creamos variable ListView para poder utilizarla en todo el Main
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        v1 = (ListView) findViewById(R.id.listaNombres); //asociamos la variable creada anteriormente a ListView listaNombres creado en actity_main
+      /*  v1 = (ListView) findViewById(R.id.listaNombres); //asociamos la variable creada anteriormente a ListView listaNombres creado en actity_main
 
 
         String[] datos = new String[]{"PERFIL","JUEGO","INSTRUCCIONES","INFORMACIÓN"}; //String de datos donde introducimos los nombres
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         //INTERFAZ o VISIÓN
         final ListView listView = (ListView) findViewById(R.id.listaNombres);
 
-        listView.setAdapter(adapter); //asociamos el ListView con los datos del array
+        listView.setAdapter(adapter); //asociamos el ListView con los datos del array*/
 
 
     }
