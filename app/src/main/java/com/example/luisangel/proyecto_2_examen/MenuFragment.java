@@ -23,10 +23,10 @@ import java.util.Arrays;
  * Use the {@link MenuFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Menu1Fragment extends Fragment {
+public class MenuFragment extends Fragment {
 
 
-    public Menu1Fragment() {
+    public MenuFragment() {
         // Required empty public constructor
     }
 
@@ -42,7 +42,7 @@ public class Menu1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu1, container, false);
+        return inflater.inflate(R.layout.fragment_menu, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
