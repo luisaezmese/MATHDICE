@@ -21,7 +21,7 @@
         android:id="@+id/listaNombres"
         android:layout_height="300dp" />-->
     <fragment android:name="com.example.luisangel.proyecto_2_examen.MenuFragment"
-        android:id="@+id/lista"
+        android:id="@+id/list_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
