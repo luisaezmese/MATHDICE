@@ -8,8 +8,9 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="264dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
         app:srcCompat="@drawable/imagen2"
         android:id="@+id/imageView"
         android:background="@color/colorPrimaryDark"/>
@@ -19,6 +20,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:id="@+id/listan"
-        android:layout_height="300dp" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
 
 </LinearLayout>

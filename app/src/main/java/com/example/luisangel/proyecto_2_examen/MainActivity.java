@@ -3,17 +3,14 @@ package com.example.luisangel.proyecto_2_examen;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.*;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+
+import android.widget.Toast;
 
 import com.example.luisangel.splashimage.R;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MenuFragment.MenuFragmentListener{
 
     //ListView v1; //Creamos variable ListView para poder utilizarla en todo el Main
     @Override
@@ -21,24 +18,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-      /*  v1 = (ListView) findViewById(R.id.listaNombres); //asociamos la variable creada anteriormente a ListView listaNombres creado en actity_main
+        //Declaramos nuevo Fragment para mostrar
+        DinamicFragment fragment1 = new DinamicFragment();
 
-
-        String[] datos = new String[]{"PERFIL","JUEGO","INSTRUCCIONES","INFORMACIÓN"}; //String de datos donde introducimos los nombres
-
-        ArrayList<String> lista = new ArrayList<>(Arrays.asList(datos));
-
-       // ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, datos); //asociamos String de datos al array
-
-        MenuAdapter adapter = new MenuAdapter(this,lista);
-
-
-        //INTERFAZ o VISIÓN
-        final ListView listView = (ListView) findViewById(R.id.listaNombres);
-
-        listView.setAdapter(adapter); //asociamos el ListView con los datos del array*/
-
+        getSupportFragmentManager().beginTransaction().add(R.id.contenido, fragment1).commit();
 
     }
 
+    @Override
+
+    //Acciones a realizar al hacer click en cada elemento de la lista según su posición
+   public void onListSelected(int position, String item) {
+        switch (position) {
+            case 0:
+                Toast.makeText(this, item, Toast.LENGTH_LONG).show();
+                break;
+            case 1:
+                Toast.makeText(this, item, Toast.LENGTH_LONG).show();
+                break;
+            case 2:
+                Toast.makeText(this, item, Toast.LENGTH_LONG).show();
+                break;
+            case 3:
+                Toast.makeText(this, item, Toast.LENGTH_LONG).show();
+                break;
+        }
+
+    }
 }

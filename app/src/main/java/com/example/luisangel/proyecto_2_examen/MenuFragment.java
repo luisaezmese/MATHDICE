@@ -1,5 +1,6 @@
 package com.example.luisangel.proyecto_2_examen;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.luisangel.splashimage.R;
@@ -25,11 +27,18 @@ import java.util.Arrays;
  */
 public class MenuFragment extends Fragment {
 
+    //Declaramos la interface del Fragment y el Listener
+    MenuFragmentListener mCallback;
+    private customListener mListener;
 
     public MenuFragment() {
         // Required empty public constructor
     }
 
+    //Interface al clickar en la lista coge la posición y el texto
+    public interface MenuFragmentListener{
+        public void onListSelected(int position,String item);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,13 +55,18 @@ public class MenuFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    /*public void onButtonPressed(Uri uri) {
 
-    }
+    }*/
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mCallback=(MenuFragmentListener)activity;
+        }catch (ClassCastException e){
+            throw new ClassCastException(activity.toString()+ "must implement OnHeadlineSelectedListener");
+        }
     }
 
     @Override
@@ -63,8 +77,6 @@ public class MenuFragment extends Fragment {
 
         ArrayList<String> lista = new ArrayList<>(Arrays.asList(datos));
 
-        // ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, datos); //asociamos String de datos al array
-
         MenuAdapter adapter = new MenuAdapter(getActivity(),lista);
 
 
@@ -73,6 +85,8 @@ public class MenuFragment extends Fragment {
 
         listView.setAdapter(adapter); //asociamos el ListView con los datos del array
 
+        //Acciones de la lista
+        listView.setOnItemClickListener(new customListener());
 
     }
 
@@ -95,4 +109,17 @@ public class MenuFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    //Implementamos Listener para el listView
+    private class customListener implements AdapterView.OnItemClickListener{
+
+        //Recibe el Adapter con el implements, el view, donde se ha clickado y la id
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            //String de la posición clickada
+            String item = (String) parent.getItemAtPosition(position);
+            //Pasamos la información
+            mCallback.onListSelected(position,item);
+        }
+    }
+
 }

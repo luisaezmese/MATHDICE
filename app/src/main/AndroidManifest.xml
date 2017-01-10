@@ -17,7 +17,8 @@
         </activity>
         <activity
             android:name="com.example.luisangel.proyecto_2_examen.MainActivity"
-            android:label="@string/app_name" /> //Ahora ya pasa al MainActivity
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"/> //Ahora ya pasa al MainActivity .Obligamos a que esté en posición HORIZONTAL
     </application>
 
 </manifest>

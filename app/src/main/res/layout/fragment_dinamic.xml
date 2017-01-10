@@ -1,0 +1,18 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.luisangel.proyecto_2_examen.DinamicFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!-- Corresponde con el Fragment Dinamico donde se ha añadido un mensaje de BIENVENIDA por ahora-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="BIENVENIDO A MATHDICE"
+        android:textColor="#000055"
+        android:gravity="fill_vertical|center_horizontal"
+        android:textSize="40sp"
+        android:background="#555000"/>
+
+</FrameLayout>
