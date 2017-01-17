@@ -1,5 +1,6 @@
 package com.example.luisangel.proyecto_2_examen;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -113,14 +114,14 @@ public class PerfilFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-       /* if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mButton = (buttonListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement ListFragmentListener");
+        }
     }
 
     @Override
