@@ -73,7 +73,7 @@ public class MenuFragment extends Fragment {
     public void onActivityCreated(Bundle saveInstanceState) {
         super.onActivityCreated(saveInstanceState);
 
-        String[] datos = new String[]{"PERFIL","JUEGO","INSTRUCCIONES","INFORMACIÓN"}; //String de datos donde introducimos los nombres
+        String[] datos = new String[]{"PERFIL","JUEGO","MUSICA","INFORMACIÓN"}; //String de datos donde introducimos los nombres
 
         ArrayList<String> lista = new ArrayList<>(Arrays.asList(datos));
 
