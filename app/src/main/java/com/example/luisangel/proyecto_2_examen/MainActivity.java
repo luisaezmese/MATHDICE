@@ -1,6 +1,8 @@
 package com.example.luisangel.proyecto_2_examen;
 
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,13 +17,13 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.Menu
    //Definimos un objeto de la clase jugador
     public Jugador jugador=new Jugador();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Bienvenida();
-
     }
 
     public void Bienvenida(){
@@ -54,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.Menu
                 getSupportFragmentManager().beginTransaction().replace(R.id.contenido, NuevoJuego).commit();
                 break;
             case 2:
-                Toast.makeText(this, item, Toast.LENGTH_LONG).show();
+                MusicFragment music = new MusicFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.contenido, music).commit();
                 break;
             case 3:
                 Toast.makeText(this, item, Toast.LENGTH_LONG).show();
@@ -63,10 +66,12 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.Menu
 
     }
 
+
     @Override
-    public void onClickButton(String nombre, String nick) {
+    public void onClickButton(String nombre, String nick, int puntos) {
         jugador.setNombre(nombre); //Pasamos en nombre introducido
-        jugador.setNick(nick); // Pasamos el nick introducido
+        jugador.setNick(nick);// Pasamos el nick introducido
+        jugador.setPuntos(puntos);// Pasamos el puntos introducido
         //Sacamos mensaje con nombre jugador y nickname
         Toast.makeText(this, "Bienvenido :"+jugador.getNombre()+", con NickName :"+jugador.getNick(),Toast.LENGTH_LONG).show();
         //Vamos a la pantalla inicial e Bienvenida

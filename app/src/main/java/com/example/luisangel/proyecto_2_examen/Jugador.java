@@ -6,6 +6,7 @@ public class Jugador {
     private String nombre= "GUEST";
     private String nick= "GUEST";
     private int puntos = 0;
+    private int id;
 
     public Jugador() {
     }
@@ -22,6 +23,10 @@ public class Jugador {
         return puntos;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -32,6 +37,10 @@ public class Jugador {
 
     public void setPuntos(int puntos) {
         this.puntos = puntos;
+    }
+
+    public void setId (int puntos) {
+        this.id = id;
     }
 
     @Override

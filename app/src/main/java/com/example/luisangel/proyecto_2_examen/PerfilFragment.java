@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.luisangel.splashimage.R;
+
+import java.util.ArrayList;
 
 
 /**
@@ -23,57 +26,38 @@ import com.example.luisangel.splashimage.R;
  * create an instance of this fragment.
  */
 public class PerfilFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    //private static final String ARG_PARAM1 = "param1";
-    //private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-
-    //private String mParam1;
-    //private String mParam2;
-    buttonListener mButton;
+    buttonListener mButton; //Comunicar el Fragment con la Activity principal
     String nombreUsuario; //Guardar nombre del usuario
     String apodoUsuario; //Guardar nick del usuario
+    int puntosusuario;
+    Context context;
+    private MyDBAdapter dbAdapter;//Llamamos a la clase MyDBAdapter del MainActivity
 
-    //Listener sobre el botón para guardar los datos introducidos
+    private ArrayList<String> arrayListalias;
+    private ArrayList<String> arrayListnombre;
+    private ArrayList<String> arrayListpuntos;
+    Jugador jugador = new Jugador();
+
+    //Listener sobre el botón para guardar los datos introducidos y pasarselos a la Actividad principal
     public interface buttonListener{
-        public void onClickButton(String nombre, String nick);
+        public void onClickButton(String nombre, String nick, int puntos);
 
     }
 
-    //private OnFragmentInteractionListener mListener;
 
     //CONSTRUCTOR
     public PerfilFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PerfilFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    /*public static PerfilFragment newInstance(String param1, String param2) {
-        PerfilFragment fragment = new PerfilFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       /* if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }*/
+
+
     }
 
     @Override
@@ -82,12 +66,16 @@ public class PerfilFragment extends Fragment {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_perfil, container, false);
 
+        context= this.getActivity();
+        dbAdapter = new MyDBAdapter(v.getContext());//Instanciamos un objeto del tipo MyDBAdapter
+
         //Declaramos los EditText donde se recogen los datos introducidos
         //Declaramos el boton para guardar esos datos
 
         final EditText nombre = (EditText) v.findViewById(R.id.editTextNombre);
         final EditText nick = (EditText) v.findViewById(R.id.editTextNick);
         final Button guardar = (Button) v.findViewById(R.id.buttonGuardar);
+        final Button recuperar = (Button) v.findViewById(R.id.buttonRecuperar);
 
         //Acción al realizar clik en el botón GUARDAR
 
@@ -98,7 +86,34 @@ public class PerfilFragment extends Fragment {
                         //Guardar los valores introducidos
                         nombreUsuario = nombre.getText().toString();
                         apodoUsuario = nick.getText().toString();
-                        mButton.onClickButton(nombreUsuario, apodoUsuario); //Pasamos nombre y nick al mButton para utilizarlos posteriormente
+                        mButton.onClickButton(nombreUsuario, apodoUsuario,0); //Pasamos nombre y nick al mButton para utilizarlos posteriormente
+
+                        dbAdapter.open();//abrimos la BBDD si ya existe o crearla sino existe
+                        dbAdapter.insertarAlumno(nombreUsuario,apodoUsuario,0);//Insertamos los  datos en la BBDD
+                        }
+                }
+        );
+
+        //Acción al realizar clik en el botón RECUPERAR
+
+        recuperar.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick (View v){
+
+                        String apodoUsuario1 = nick.getText().toString();
+                        Toast.makeText(context,"Apodo: "+apodoUsuario1, Toast.LENGTH_SHORT).show();
+                        dbAdapter.open();//abrimos la BBDD si ya existe o crearla sino existe
+                        arrayListalias=dbAdapter.recuperaralias(apodoUsuario1);
+                        arrayListnombre=dbAdapter.recuperarnombre(apodoUsuario1);
+                        arrayListpuntos=dbAdapter.recuperarpuntos(apodoUsuario1);
+                        jugador.setNombre(arrayListnombre.get(0));
+                        jugador.setNick(arrayListalias.get(0));
+                        jugador.setPuntos(Integer.parseInt(arrayListpuntos.get(0)));
+                        nombreUsuario = jugador.getNombre();
+                        apodoUsuario=jugador.getNick();
+                        puntosusuario=jugador.getPuntos();
+                        mButton.onClickButton(nombreUsuario, apodoUsuario,puntosusuario);
                     }
                 }
         );
@@ -108,9 +123,6 @@ public class PerfilFragment extends Fragment {
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-       /* if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }*/
     }
 
     @Override
@@ -127,7 +139,6 @@ public class PerfilFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-       // mListener = null;
     }
 
     /**

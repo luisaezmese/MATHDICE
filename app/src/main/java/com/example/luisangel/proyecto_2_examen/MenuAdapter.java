@@ -2,6 +2,8 @@ package com.example.luisangel.proyecto_2_examen;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ public class MenuAdapter extends ArrayAdapter{
         this.context=context;
         this.datos=datos;
     }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public View getView (int position, View convertView, ViewGroup parent){
         LayoutInflater inflater= (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(convertView==null){
